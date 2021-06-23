@@ -1,19 +1,20 @@
 from django.shortcuts import render
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.forms import ValidationError
 from django.http import HttpResponseRedirect
 
 from .forms import LoginForm, RegisterForm
-from .models import Post
 
 
+@login_required(login_url="/login")
 def index(request):
-    posts = Post.objects.all()
-    return render(request, "index.html", context=dict(posts=posts))
+    return render(request, "index.html", context=None)
 
 
 def login_view(request):
+    next = request.GET.get("next", None)
 
     if request.method == "POST":
         # create form with request.POST data.
@@ -27,6 +28,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                return HttpResponseRedirect(redirect_to=next if next else "/")
             else:
                 raise ValidationError("Invalid username or password.")
     else:
@@ -71,7 +73,7 @@ def register_view(request):
             user = authenticate(request, username=username, password=password)
             # self-explanatory.
             login(request, user)
-
+            return HttpResponseRedirect(redirect_to="/")
     else:
         form = RegisterForm()
 

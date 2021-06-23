@@ -2,7 +2,7 @@
 FROM python:3.8.3-alpine
 
 # set work directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/core
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -16,4 +16,4 @@ RUN pip install -r requirements.txt
 # copy project
 COPY core .
 
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+ENTRYPOINT ["/usr/src/core/todolist/entrypoint.sh"]
