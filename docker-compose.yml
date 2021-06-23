@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  django_service:
+  django:
     volumes:
       - static:/static
     env_file:
@@ -17,7 +17,7 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - django_service
+      - django
 
 volumes:
   static:

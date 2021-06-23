@@ -5,6 +5,12 @@ from django.forms import ValidationError
 from django.http import HttpResponseRedirect
 
 from .forms import LoginForm, RegisterForm
+from .models import Post
+
+
+def index(request):
+    posts = Post.objects.all()
+    return render(request, "index.html", context=dict(posts=posts))
 
 
 def login_view(request):
