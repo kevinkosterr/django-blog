@@ -10,6 +10,8 @@ services:
       context: .
     ports:
       - "8000:8000"
+    depends_on:
+      - postgres
   nginx:
     build: ./nginx
     volumes:
@@ -19,7 +21,7 @@ services:
     depends_on:
       - django
   postgres:
-    image: postgres:13.3-alpine
+    image: postgres:12.7-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
