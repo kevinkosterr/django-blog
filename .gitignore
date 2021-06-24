@@ -1,5 +1,10 @@
 .idea
+
+#environments
+*.env
 venv
 
-*.env
 *.sqlite3
+*.log
+*.pot
+*.pyc
