@@ -13,7 +13,10 @@ RUN pip install --upgrade pip
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
+#copy entrypoint
+COPY core/todolist/entrypoint.sh .
+
 # copy project
 COPY core .
 
-ENTRYPOINT ["/usr/src/core/todolist/entrypoint.sh"]
+ENTRYPOINT ["/usr/src/entrypoint.sh"]
