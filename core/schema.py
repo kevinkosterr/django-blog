@@ -1,8 +1,8 @@
-from blog.graphql.query import BlogQuery
+from todolist.graphql.query import ToDoQuery
 import graphene
 
 
-class Query(BlogQuery):
+class Query(ToDoQuery):
     pass
 
 
